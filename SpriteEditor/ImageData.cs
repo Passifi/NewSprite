@@ -12,7 +12,7 @@ namespace SpriteEditor
         int pixelsX, pixelsY;
         float width, height;
 
-        Color[] pixelGrid;
+        ColorT[] pixelGrid;
 
         public ImageData(int pixelsX, int pixelsY, float width, float height)
         {
@@ -20,13 +20,18 @@ namespace SpriteEditor
             this.pixelsY = pixelsY;
             this.width = width;
             this.height = height;
-            pixelGrid = new Color[pixelsX*pixelsX];
+            pixelGrid = new ColorT[pixelsX*pixelsX];
+
+            for (int y = 0; y < pixelsY*pixelsX; y++)
+            {
+                pixelGrid[y] = new ColorT(255,0,0);
+            }
 
         }
 
         public int X { get { return pixelsX; } set { pixelsX = value; } }
         public int Y { get { return pixelsY; } set { pixelsY = value; } }
-        public Color[] PixelGrid { get { return pixelGrid; }  }
+        public ColorT[] PixelGrid { get { return pixelGrid; }  }
         public float Width { get { return width; } set { width = value; } }
         public float Height { get { return height; } set { height = value; } }
 
