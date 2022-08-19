@@ -26,8 +26,9 @@ namespace SpriteEditor
             PixelDraw pxDraw = new PixelDraw(pictureBox1);
             Graphics g = pe.Graphics;
 
-            pxDraw.DrawGrid(g);
+            
             pxDraw.DrawPixelGrid(g);
+            pxDraw.DrawGrid(g);
             //int numOfPixels = 8;
             //// Pixels 
             //float pixelWidth = pictureBox1.Size.Width/numOfPixels;
@@ -38,7 +39,7 @@ namespace SpriteEditor
             //    g.DrawLine(System.Drawing.Pens.Black, pixelWidth*i, 0, pixelWidth*i, pictureBox1.Size.Height);
             //}
 
-            
+
 
 
 

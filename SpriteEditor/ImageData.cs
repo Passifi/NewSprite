@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SpriteEditor
 {
     internal class ImageData
@@ -21,10 +22,21 @@ namespace SpriteEditor
             this.width = width;
             this.height = height;
             pixelGrid = new ColorT[pixelsX*pixelsX];
-
-            for (int y = 0; y < pixelsY*pixelsX; y++)
+            byte r, g, b;
+            r = 0;
+            g = 0;
+            b = 0;
+            Random rnd = new Random();
+            for (int y = 0; y < pixelsX*pixelsX; y++)
             {
-                pixelGrid[y] = new ColorT(255,0,0);
+                if (y % 1 == 0)
+                    r += 1;
+                else if (y % 2 == 0)
+                    b += 1;
+                else if (y % 3 == 0)
+                    g += 1;
+
+                pixelGrid[y] = new ColorT(r,g,b);
             }
 
         }
