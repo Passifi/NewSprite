@@ -37,6 +37,15 @@ namespace SpriteEditor
 
         }
 
+        private void pictureBox2_Paint(object sender, System.Windows.Forms.PaintEventArgs pe){
+            PixelDraw pxDraw = new PixelDraw(pictureBox2);
+            Graphics g = pe.Graphics;
+
+
+            pxDraw.DrawPixelGrid(g);
+            
+        }
+
         private void pictureBox1_hover(object sender, EventArgs ev){
             
         }
