@@ -29,16 +29,7 @@ namespace SpriteEditor
             
             pxDraw.DrawPixelGrid(g);
             pxDraw.DrawGrid(g);
-            //int numOfPixels = 8;
-            //// Pixels 
-            //float pixelWidth = pictureBox1.Size.Width/numOfPixels;
-            //float pixelHeight = pictureBox1.Size.Height/numOfPixels;
-
-            //for (int i = 1; i <= numOfPixels; i++) {
-            //    g.DrawLine(System.Drawing.Pens.Black,0, pixelHeight * i, pictureBox1.Size.Width,pixelHeight*i);
-            //    g.DrawLine(System.Drawing.Pens.Black, pixelWidth*i, 0, pixelWidth*i, pictureBox1.Size.Height);
-            //}
-
+            
 
 
 
