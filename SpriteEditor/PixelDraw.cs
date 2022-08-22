@@ -48,10 +48,12 @@ namespace SpriteEditor
                     int x1, x2, y1, y2;
                     x1 = x * (int)imageData.Width;
                     y1 = y * (int)imageData.Height;
-                    x2 = x1+ (int)imageData.Width;
-                    y2 = y1+ (int)imageData.Height;
+                    x2 = (int)imageData.Width;
+                    y2 = (int)imageData.Height;
+                    #if DEBUG
                     Console.WriteLine($"{x1}, {y1}, {x2}, {y2}");
-                    g.FillRectangle(myBrush, new Rectangle(x,y1,x2,y2));
+                    #endif
+                    g.FillRectangle(myBrush, new Rectangle(x1,y1,x2,y2));
                     myBrush.Dispose();
                     
                 }

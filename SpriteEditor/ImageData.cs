@@ -27,16 +27,15 @@ namespace SpriteEditor
             g = 0;
             b = 0;
             Random rnd = new Random();
+            ColorT white = new ColorT(0xff, 0xff, 0xff);
+            ColorT black = new ColorT(0, 0, 0);
             for (int y = 0; y < pixelsX*pixelsX; y++)
             {
-                if (y % 1 == 0)
-                    r += 1;
-                else if (y % 2 == 0)
-                    b += 1;
-                else if (y % 3 == 0)
-                    g += 1;
 
-                pixelGrid[y] = new ColorT(r,g,b);
+                r = (byte)rnd.Next(255);
+                g = (byte)rnd.Next(255);
+                b = (byte)rnd.Next(255);
+                pixelGrid[y] = new ColorT(r, g, b);
             }
 
         }
