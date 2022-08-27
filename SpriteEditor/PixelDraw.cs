@@ -11,20 +11,21 @@ namespace SpriteEditor
     {
         PictureBox pictureBox;
         ImageData imageData;
-        public PixelDraw(PictureBox pictureBox) 
+        float pixelWidth;
+        float pixelHeight;
+        public PixelDraw(PictureBox pictureBox, ImageData img) 
         {
             int numOfPixels = 8;
             // Pixels 
-            float pixelWidth = pictureBox.Size.Width / numOfPixels;
-            float pixelHeight = pictureBox.Size.Height / numOfPixels;
+            pixelWidth = pictureBox.Size.Width / numOfPixels;
+            pixelHeight = pictureBox.Size.Height / numOfPixels;
             this.pictureBox = pictureBox;
-            this.imageData = new ImageData(numOfPixels, numOfPixels, pixelWidth, pixelHeight);
+            this.imageData = img;
         }
         public void DrawGrid(Graphics g) {
             int numOfPixels = 8;
             // Pixels 
-            float pixelWidth = pictureBox.Size.Width / numOfPixels;
-            float pixelHeight = pictureBox.Size.Height / numOfPixels;
+           
 
             for (int i = 1; i <= numOfPixels; i++)
             {
@@ -46,10 +47,10 @@ namespace SpriteEditor
 
                     System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(c);
                     int x1, x2, y1, y2;
-                    x1 = x * (int)imageData.Width;
-                    y1 = y * (int)imageData.Height;
-                    x2 = (int)imageData.Width;
-                    y2 = (int)imageData.Height;
+                    x1 = x * (int)pixelWidth;
+                    y1 = y * (int)pixelHeight;
+                    x2 = (int)pixelWidth;
+                    y2 = (int)pixelHeight;
                     #if DEBUG
                     Console.WriteLine($"{x1}, {y1}, {x2}, {y2}");
                     #endif

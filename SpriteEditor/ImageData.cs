@@ -21,7 +21,7 @@ namespace SpriteEditor
             this.pixelsY = pixelsY;
             this.width = width;
             this.height = height;
-            pixelGrid = new ColorT[pixelsX*pixelsX];
+            pixelGrid = new ColorT[pixelsX * pixelsX];
             byte r, g, b;
             r = 0;
             g = 0;
@@ -29,7 +29,7 @@ namespace SpriteEditor
             Random rnd = new Random();
             ColorT white = new ColorT(0xff, 0xff, 0xff);
             ColorT black = new ColorT(0, 0, 0);
-            for (int y = 0; y < pixelsX*pixelsX; y++)
+            for (int y = 0; y < pixelsX * pixelsX; y++)
             {
 
                 r = (byte)rnd.Next(255);
@@ -39,6 +39,13 @@ namespace SpriteEditor
             }
 
         }
+
+        public void SetPixel(int x, int y, ColorT c ) {
+
+            pixelGrid[x + y * pixelsX] = c;
+        
+        }
+
 
         public int X { get { return pixelsX; } set { pixelsX = value; } }
         public int Y { get { return pixelsY; } set { pixelsY = value; } }
