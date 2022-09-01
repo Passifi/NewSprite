@@ -15,7 +15,7 @@ namespace SpriteEditor
     {
         ImageData image;
         bool clicked = false;
-
+        PictureBox selectedBox = null;
         public Form1()
         {
             
@@ -25,6 +25,30 @@ namespace SpriteEditor
             this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_hover);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler((p, s) => clicked = false);
+            this.SpritePreview1.Click += new System.EventHandler(SpriteSelect);
+            this.SpritePreview2.Click += new System.EventHandler(SpriteSelect);
+            this.SpritePreview4.Click += new System.EventHandler(SpriteSelect);
+            this.SpritePreview3.Click += new System.EventHandler(SpriteSelect);
+            this.pictureBox6.Click += new System.EventHandler(SpriteSelect);          
+            this.pictureBox7.Click    += new System.EventHandler(SpriteSelect);          
+            this.pictureBox8.Click    += new System.EventHandler(SpriteSelect);          
+            this.pictureBox9.Click += new System.EventHandler(SpriteSelect);          
+            this.pictureBox10.Click   += new System.EventHandler(SpriteSelect);
+            this.pictureBox11.Click   += new System.EventHandler(SpriteSelect);
+            this.pictureBox12.Click += new System.EventHandler(SpriteSelect);
+            this.pictureBox13.Click   += new System.EventHandler(SpriteSelect);
+            this.pictureBox14.Click   += new System.EventHandler(SpriteSelect);
+            this.pictureBox15.Click += new System.EventHandler(SpriteSelect);
+            this.pictureBox16.Click += new System.EventHandler(SpriteSelect);
+            this.pictureBox17.Click += new System.EventHandler(SpriteSelect);
+            this.SpritePreview6.Click += new System.EventHandler(SpriteSelect);
+            this.SpritePreview5.Click += new System.EventHandler(SpriteSelect);
+            this.pictureBox20.Click += new System.EventHandler(SpriteSelect);
+            this.pictureBox21.Click += new System.EventHandler(SpriteSelect);
+            this.pictureBox22.Click += new System.EventHandler(SpriteSelect);
+            this.pictureBox23.Click += new System.EventHandler(SpriteSelect);
+            this.pictureBox24.Click += new System.EventHandler(SpriteSelect);
+            this.pictureBox25.Click += new System.EventHandler(SpriteSelect);
             int numOfPixels = 8;
             // Pixels 
             float pixelWidth = pictureBox1.Size.Width / numOfPixels;
@@ -53,7 +77,7 @@ namespace SpriteEditor
 
         private void pictureBox2_Paint(object sender, System.Windows.Forms.PaintEventArgs pe)
         {
-            PixelDraw pxDraw = new PixelDraw(pictureBox2,image);
+            PixelDraw pxDraw = new PixelDraw(SpritePreview1,image);
             Graphics g = pe.Graphics;
 
 
@@ -66,6 +90,11 @@ namespace SpriteEditor
             
         }
 
+        private void SpriteSelect(object sender, EventArgs ev) {
+            selectedBox = ((PictureBox)sender);
+           
+        }
+
         private void pictureBox1_MouseMove(object sender, EventArgs ev) 
         {
             if (clicked) 
@@ -76,7 +105,13 @@ namespace SpriteEditor
                 ColorT c = new ColorT(123, 12, 12);
                 image.SetPixel(x, y, c);
                 pictureBox1.Invalidate();
-                pictureBox2.Invalidate();
+                SpritePreview1.Invalidate();
+                selectedBox.Invalidate();
+                selectedBox.Paint += new System.Windows.Forms.PaintEventHandler(pictureBox2_Paint);
+                // There are two ways I can think of doing this 
+                // Either keep updating selectedBox Paints like this or attach an Image File to the sprite box 
+                // the later one makes more sense given what I plan to do so this should be the way however
+                // that would require extended picturebox or creating a child class of PictureBox ... 
 
             }
                 
@@ -93,7 +128,12 @@ namespace SpriteEditor
             ColorT c = new ColorT(123, 12, 12);
             image.SetPixel(x, y, c);
             pictureBox1.Invalidate();
-            pictureBox2.Invalidate();
+            SpritePreview1.Invalidate();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
