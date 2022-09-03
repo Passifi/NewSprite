@@ -13,7 +13,9 @@ namespace SpriteEditor
 {
     public partial class Form1 : Form
     {
+        const int noOfSprites = 24;
         ImageData image;
+        ImageData[] spriteImages;
         bool clicked = false;
         PictureBox selectedBox = null;
         public Form1()
@@ -54,6 +56,13 @@ namespace SpriteEditor
             float pixelWidth = pictureBox1.Size.Width / numOfPixels;
             float pixelHeight = pictureBox1.Size.Height / numOfPixels;
             image = new ImageData(numOfPixels, numOfPixels, pixelWidth, pixelHeight);
+            spriteImages = new ImageData[noOfSprites];
+
+            for(int i=0; i < noOfSprites; i++)  
+            {
+                spriteImages[i] = new ImageData(numOfPixels, numOfPixels, pixelWidth, pixelHeight);
+            }
+
 
         }
 
@@ -106,8 +115,8 @@ namespace SpriteEditor
                 image.SetPixel(x, y, c);
                 pictureBox1.Invalidate();
                 SpritePreview1.Invalidate();
-                selectedBox.Invalidate();
-                selectedBox.Paint += new System.Windows.Forms.PaintEventHandler(pictureBox2_Paint);
+                //selectedBox.Invalidate();
+                //selectedBox.Paint += new System.Windows.Forms.PaintEventHandler(pictureBox2_Paint);
                 // There are two ways I can think of doing this 
                 // Either keep updating selectedBox Paints like this or attach an Image File to the sprite box 
                 // the later one makes more sense given what I plan to do so this should be the way however
