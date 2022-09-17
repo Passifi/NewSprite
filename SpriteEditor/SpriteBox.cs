@@ -8,10 +8,10 @@ namespace SpriteEditor
 {
     public class SpriteBox : PictureBox
     {
-        ImageData image;
+        public ImageData Image;
        
-        void SetImage(ImageData img) {
-            image = img;
+        public void SetImage(ImageData img) {
+            Image = img;
         }
         
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpriteEditor
 {
-    internal class ImageData
+    public class ImageData
     {
 
         int pixelsX, pixelsY;

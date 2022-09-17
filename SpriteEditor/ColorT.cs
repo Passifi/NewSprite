@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpriteEditor
 {
-    internal class ColorT
+    public class ColorT
     {
 
         byte red;

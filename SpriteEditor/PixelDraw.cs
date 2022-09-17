@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 namespace SpriteEditor
 {
-    internal class PixelDraw
+    public class PixelDraw
     {
         PictureBox pictureBox;
         ImageData imageData;

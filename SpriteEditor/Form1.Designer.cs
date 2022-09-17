@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.DrawArea = new System.Windows.Forms.PictureBox();
             this.SpritePreview1 = new System.Windows.Forms.PictureBox();
             this.SpritePreview2 = new System.Windows.Forms.PictureBox();
             this.SpritePreview4 = new System.Windows.Forms.PictureBox();
@@ -53,7 +53,7 @@
             this.pictureBox23 = new System.Windows.Forms.PictureBox();
             this.pictureBox24 = new System.Windows.Forms.PictureBox();
             this.pictureBox25 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrawArea)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpritePreview1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpritePreview2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpritePreview4)).BeginInit();
@@ -80,14 +80,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox25)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // DrawArea
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.SeaShell;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 13);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(400, 400);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.DrawArea.BackColor = System.Drawing.Color.SeaShell;
+            this.DrawArea.Location = new System.Drawing.Point(13, 13);
+            this.DrawArea.Name = "DrawArea";
+            this.DrawArea.Size = new System.Drawing.Size(400, 400);
+            this.DrawArea.TabIndex = 0;
+            this.DrawArea.TabStop = false;
             // 
             // SpritePreview1
             // 
@@ -335,11 +335,11 @@
             this.Controls.Add(this.SpritePreview3);
             this.Controls.Add(this.SpritePreview2);
             this.Controls.Add(this.SpritePreview1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.DrawArea);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DrawArea)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpritePreview1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpritePreview2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpritePreview4)).EndInit();
@@ -370,7 +370,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox DrawArea;
         private System.Windows.Forms.PictureBox SpritePreview1;
         private System.Windows.Forms.PictureBox SpritePreview2;
         private System.Windows.Forms.PictureBox SpritePreview4;
