@@ -53,6 +53,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Handler\SpriteHandler.cs" />
     <Compile Include="ImageData.cs" />
     <Compile Include="PixelDraw.cs" />
     <Compile Include="Program.cs" />

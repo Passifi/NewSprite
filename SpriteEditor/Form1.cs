@@ -1,10 +1,12 @@
-﻿using System;
+﻿using SpriteEditor.Handler;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,6 +20,7 @@ namespace SpriteEditor
         ImageData[] spriteImages;
         bool clicked = false;
         PictureBox selectedBox = null;
+        SpriteHandler spriteHandler = null;
         public Form1()
         {
             
@@ -63,6 +66,8 @@ namespace SpriteEditor
                 spriteImages[i] = new ImageData(numOfPixels, numOfPixels, pixelWidth, pixelHeight);
             }
 
+            spriteHandler = new SpriteHandler(spriteImages.ToList());
+
 
         }
 
@@ -73,15 +78,8 @@ namespace SpriteEditor
             PixelDraw pxDraw = new PixelDraw(DrawArea,image);
             Graphics g = pe.Graphics;
 
-            
             pxDraw.DrawPixelGrid(g);
             pxDraw.DrawGrid(g);
-            
-
-
-
-
-
         }
 
         private void pictureBox2_Paint(object sender, System.Windows.Forms.PaintEventArgs pe)
@@ -100,10 +98,14 @@ namespace SpriteEditor
         }
 
         private void SpriteSelect(object sender, EventArgs ev) {
-            selectedBox.Paint -= new System.Windows.Forms.PaintEventHandler(pictureBox2_Paint);
-            image = spriteImages[3];
-            selectedBox = ((PictureBox)sender);
 
+            // get index of spriteObject
+            PictureBox _pBox = (PictureBox)sender;
+            string resultString = Regex.Match(_pBox.Name, @"\d+").Value;
+            Console.WriteLine(resultString);
+            
+            spriteHandler.SelectImage(Convert.ToInt32(resultString));
+            image = spriteHandler.GetImage();
             DrawArea.Invalidate();
 
            
@@ -120,8 +122,8 @@ namespace SpriteEditor
                 image.SetPixel(x, y, c);
                 DrawArea.Invalidate();
                 SpritePreview1.Invalidate();
-                selectedBox.Paint += new System.Windows.Forms.PaintEventHandler(pictureBox2_Paint);
-                selectedBox.Invalidate();
+                //selectedBox.Paint += new System.Windows.Forms.PaintEventHandler(pictureBox2_Paint);
+                //selectedBox.Invalidate();
                 // There are two ways I can think of doing this 
                 // Either keep updating selectedBox Paints like this or attach an Image File to the sprite box 
                 // the later one makes more sense given what I plan to do so this should be the way however
