@@ -97,7 +97,7 @@
             this.SpritePreview1.Size = new System.Drawing.Size(58, 58);
             this.SpritePreview1.TabIndex = 1;
             this.SpritePreview1.TabStop = false;
-            this.SpritePreview1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
+            this.SpritePreview1.Paint += new System.Windows.Forms.PaintEventHandler(this.SpritePaint);
             // 
             // SpritePreview2
             // 

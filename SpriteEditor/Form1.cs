@@ -26,11 +26,15 @@ namespace SpriteEditor
             
             InitializeComponent();
             this.DrawArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_Click);
-            this.DrawArea.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.DrawArea.Paint += new System.Windows.Forms.PaintEventHandler(this.CanvasPaint);
             this.DrawArea.MouseHover += new System.EventHandler(this.pictureBox1_hover);
             this.DrawArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.DrawArea.MouseUp += new System.Windows.Forms.MouseEventHandler((p, s) => clicked = false);
             this.SpritePreview1.Click += new System.EventHandler(SpriteSelect);
+            SpritePreview2.Paint += new System.Windows.Forms.PaintEventHandler(this.SpritePaint);
+            SpritePreview3.Paint += new System.Windows.Forms.PaintEventHandler(this.SpritePaint);
+            SpritePreview4.Paint += new System.Windows.Forms.PaintEventHandler(this.SpritePaint);
+           
             this.SpritePreview2.Click += new System.EventHandler(SpriteSelect);
             this.SpritePreview4.Click += new System.EventHandler(SpriteSelect);
             this.SpritePreview3.Click += new System.EventHandler(SpriteSelect);
@@ -73,7 +77,7 @@ namespace SpriteEditor
 
                 
 
-        private void pictureBox1_Paint(object sender, System.Windows.Forms.PaintEventArgs pe)
+        private void CanvasPaint(object sender, System.Windows.Forms.PaintEventArgs pe)
         {
             PixelDraw pxDraw = new PixelDraw(DrawArea,image);
             Graphics g = pe.Graphics;
@@ -82,7 +86,7 @@ namespace SpriteEditor
             pxDraw.DrawGrid(g);
         }
 
-        private void pictureBox2_Paint(object sender, System.Windows.Forms.PaintEventArgs pe)
+        private void SpritePaint(object sender, System.Windows.Forms.PaintEventArgs pe)
         {
             PixelDraw pxDraw = new PixelDraw(SpritePreview1,image);
             Graphics g = pe.Graphics;
@@ -101,6 +105,8 @@ namespace SpriteEditor
 
             // get index of spriteObject
             PictureBox _pBox = (PictureBox)sender;
+           
+            selectedBox = _pBox;
             string resultString = Regex.Match(_pBox.Name, @"\d+").Value;
             Console.WriteLine(resultString);
             
@@ -121,7 +127,7 @@ namespace SpriteEditor
                 ColorT c = new ColorT(123, 12, 12);
                 image.SetPixel(x, y, c);
                 DrawArea.Invalidate();
-                SpritePreview1.Invalidate();
+                selectedBox.Invalidate();
                 //selectedBox.Paint += new System.Windows.Forms.PaintEventHandler(pictureBox2_Paint);
                 //selectedBox.Invalidate();
                 // There are two ways I can think of doing this 
@@ -144,7 +150,7 @@ namespace SpriteEditor
             ColorT c = new ColorT(123, 12, 12);
             image.SetPixel(x, y, c);
             DrawArea.Invalidate();
-            SpritePreview1.Invalidate();
+            selectedBox.Invalidate();
         }
 
         private void Form1_Load(object sender, EventArgs e)
