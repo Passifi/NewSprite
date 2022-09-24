@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpriteEditor
 {
-    internal class ImageData
+    public class ImageData
     {
 
         int pixelsX, pixelsY;
@@ -22,10 +22,23 @@ namespace SpriteEditor
             this.width = width;
             this.height = height;
             pixelGrid = new ColorT[pixelsX * pixelsX];
-            byte r, g, b;
-            r = 0;
-            g = 0;
-            b = 0;
+            
+            ClearCanvas(pixelsX,  255,255,255);
+
+        }
+
+        private void ClearCanvas(int pixelsX, byte r=0, byte g=0, byte b=0)
+        {
+           
+            for (int y = 0; y < pixelsX * pixelsX; y++)
+            {
+
+                pixelGrid[y] = new ColorT(r, g, b);
+            }
+        }
+
+        private void RandomFill(int pixelsX, ref byte r, ref byte g, ref byte b)
+        {
             Random rnd = new Random();
             ColorT white = new ColorT(0xff, 0xff, 0xff);
             ColorT black = new ColorT(0, 0, 0);
@@ -37,7 +50,6 @@ namespace SpriteEditor
                 b = (byte)rnd.Next(255);
                 pixelGrid[y] = new ColorT(r, g, b);
             }
-
         }
 
         public void SetPixel(int x, int y, ColorT c ) {

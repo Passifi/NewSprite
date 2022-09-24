@@ -1,10 +1,12 @@
-﻿using System;
+﻿using SpriteEditor.Handler;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,16 +20,21 @@ namespace SpriteEditor
         ImageData[] spriteImages;
         bool clicked = false;
         PictureBox selectedBox = null;
+        SpriteHandler spriteHandler = null;
         public Form1()
         {
             
             InitializeComponent();
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_Click);
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
-            this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_hover);
-            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
-            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler((p, s) => clicked = false);
+            this.DrawArea.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_Click);
+            this.DrawArea.Paint += new System.Windows.Forms.PaintEventHandler(this.CanvasPaint);
+            this.DrawArea.MouseHover += new System.EventHandler(this.pictureBox1_hover);
+            this.DrawArea.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.DrawArea.MouseUp += new System.Windows.Forms.MouseEventHandler((p, s) => clicked = false);
             this.SpritePreview1.Click += new System.EventHandler(SpriteSelect);
+            SpritePreview2.Paint += new System.Windows.Forms.PaintEventHandler(this.SpritePaint);
+            SpritePreview3.Paint += new System.Windows.Forms.PaintEventHandler(this.SpritePaint);
+            SpritePreview4.Paint += new System.Windows.Forms.PaintEventHandler(this.SpritePaint);
+           
             this.SpritePreview2.Click += new System.EventHandler(SpriteSelect);
             this.SpritePreview4.Click += new System.EventHandler(SpriteSelect);
             this.SpritePreview3.Click += new System.EventHandler(SpriteSelect);
@@ -53,38 +60,33 @@ namespace SpriteEditor
             this.pictureBox25.Click += new System.EventHandler(SpriteSelect);
             int numOfPixels = 8;
             // Pixels 
-            float pixelWidth = pictureBox1.Size.Width / numOfPixels;
-            float pixelHeight = pictureBox1.Size.Height / numOfPixels;
+            float pixelWidth = DrawArea.Size.Width / numOfPixels;
+            float pixelHeight = DrawArea.Size.Height / numOfPixels;
             image = new ImageData(numOfPixels, numOfPixels, pixelWidth, pixelHeight);
             spriteImages = new ImageData[noOfSprites];
-
+            selectedBox = SpritePreview1;
             for(int i=0; i < noOfSprites; i++)  
             {
                 spriteImages[i] = new ImageData(numOfPixels, numOfPixels, pixelWidth, pixelHeight);
             }
+
+            spriteHandler = new SpriteHandler(spriteImages.ToList());
 
 
         }
 
                 
 
-        private void pictureBox1_Paint(object sender, System.Windows.Forms.PaintEventArgs pe)
+        private void CanvasPaint(object sender, System.Windows.Forms.PaintEventArgs pe)
         {
-            PixelDraw pxDraw = new PixelDraw(pictureBox1,image);
+            PixelDraw pxDraw = new PixelDraw(DrawArea,image);
             Graphics g = pe.Graphics;
 
-            
             pxDraw.DrawPixelGrid(g);
             pxDraw.DrawGrid(g);
-            
-
-
-
-
-
         }
 
-        private void pictureBox2_Paint(object sender, System.Windows.Forms.PaintEventArgs pe)
+        private void SpritePaint(object sender, System.Windows.Forms.PaintEventArgs pe)
         {
             PixelDraw pxDraw = new PixelDraw(SpritePreview1,image);
             Graphics g = pe.Graphics;
@@ -100,7 +102,18 @@ namespace SpriteEditor
         }
 
         private void SpriteSelect(object sender, EventArgs ev) {
-            selectedBox = ((PictureBox)sender);
+
+            // get index of spriteObject
+            PictureBox _pBox = (PictureBox)sender;
+           
+            selectedBox = _pBox;
+            string resultString = Regex.Match(_pBox.Name, @"\d+").Value;
+            Console.WriteLine(resultString);
+            
+            spriteHandler.SelectImage(Convert.ToInt32(resultString));
+            image = spriteHandler.GetImage();
+            DrawArea.Invalidate();
+
            
         }
 
@@ -108,15 +121,15 @@ namespace SpriteEditor
         {
             if (clicked) 
             {
-                var coordinates = pictureBox1.PointToClient(Cursor.Position);
+                var coordinates = DrawArea.PointToClient(Cursor.Position);
                 int x = (int)(coordinates.X / image.Width);
                 int y = (int)(coordinates.Y / image.Height);
                 ColorT c = new ColorT(123, 12, 12);
                 image.SetPixel(x, y, c);
-                pictureBox1.Invalidate();
-                SpritePreview1.Invalidate();
-                //selectedBox.Invalidate();
+                DrawArea.Invalidate();
+                selectedBox.Invalidate();
                 //selectedBox.Paint += new System.Windows.Forms.PaintEventHandler(pictureBox2_Paint);
+                //selectedBox.Invalidate();
                 // There are two ways I can think of doing this 
                 // Either keep updating selectedBox Paints like this or attach an Image File to the sprite box 
                 // the later one makes more sense given what I plan to do so this should be the way however
@@ -130,14 +143,14 @@ namespace SpriteEditor
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             clicked = true;
-            var coordinates = pictureBox1.PointToClient(Cursor.Position);
+            var coordinates = DrawArea.PointToClient(Cursor.Position);
             // Get Pixel Coordinates in grid 
             int x = (int)(coordinates.X / image.Width);
             int y = (int)(coordinates.Y / image.Height);
             ColorT c = new ColorT(123, 12, 12);
             image.SetPixel(x, y, c);
-            pictureBox1.Invalidate();
-            SpritePreview1.Invalidate();
+            DrawArea.Invalidate();
+            selectedBox.Invalidate();
         }
 
         private void Form1_Load(object sender, EventArgs e)
