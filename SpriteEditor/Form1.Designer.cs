@@ -1,6 +1,6 @@
 ﻿namespace SpriteEditor
 {
-    partial class Form1
+    partial class MainWindow
     {
         /// <summary>
         /// Erforderliche Designervariable.
@@ -306,7 +306,7 @@
             this.pictureBox25.TabIndex = 23;
             this.pictureBox25.TabStop = false;
             // 
-            // Form1
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -336,8 +336,8 @@
             this.Controls.Add(this.SpritePreview2);
             this.Controls.Add(this.SpritePreview1);
             this.Controls.Add(this.DrawArea);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainWindow";
+            this.Text = "MSSprite Editor";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DrawArea)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpritePreview1)).EndInit();

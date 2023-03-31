@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace SpriteEditor
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
         const int noOfSprites = 24;
         ImageData image;
@@ -21,7 +21,7 @@ namespace SpriteEditor
         bool clicked = false;
         PictureBox selectedBox = null;
         SpriteHandler spriteHandler = null;
-        public Form1()
+        public MainWindow()
         {
             
             InitializeComponent();
